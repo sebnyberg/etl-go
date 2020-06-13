@@ -1,0 +1,11 @@
+{
+  "type": "record",
+  "name": "purchase",
+  "fields": [
+    { "name": "id", "type": "string" },
+    { "name": "name", "type": "string" },
+    { "name": "description", "type": ["null", "string"] },
+    { "name": "productSku", "type": "string" },
+    { "name": "purchaseTs", "type": "string" }
+  ]
+}

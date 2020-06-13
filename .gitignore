@@ -1,0 +1,5 @@
+**/.env
+**/telepresence.log
+**/tmp
+**/*.out
+**/*.pprof
