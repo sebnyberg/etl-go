@@ -4,6 +4,7 @@ import (
 	"flag"
 	"os"
 	"path"
+	"time"
 
 	"github.com/actgardner/gogen-avro/v7/container"
 	"github.com/sebnyberg/etl-go/avro"
@@ -23,6 +24,10 @@ func newGeneratorFromArgs(args []string) (*generator, error) {
 	fs.StringVar(&gen.filename, "gen-path", "tmp/purchases.avro", "generated avro file path")
 	fs.IntVar(&gen.numFakes, "n", 1e3, "number of generated fakes")
 	fs.IntVar(&gen.recordsPerblock, "r", 1e3, "records per write-block")
+
+	if err := fs.Parse(args); err != nil {
+		return nil, err
+	}
 
 	return gen, nil
 }
@@ -47,6 +52,7 @@ func (g *generator) run() error {
 	for i := 0; i < g.numFakes; i++ {
 		aw.WriteRecord(&avro.Purchase{})
 	}
+	time.Sleep(1 * time.Second)
 
 	return nil
 }
