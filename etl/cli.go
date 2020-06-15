@@ -10,6 +10,9 @@ func CLI(args []string) int {
 	if len(args) < 1 {
 		return 2
 	}
+
+	defer profileStop(args)()
+
 	var err error
 	switch args[0] {
 	case "gen":
