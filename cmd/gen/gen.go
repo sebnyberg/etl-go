@@ -1,4 +1,4 @@
-package etl
+package main
 
 import (
 	"flag"
@@ -14,6 +14,10 @@ type generator struct {
 	filename        string
 	numFakes        int
 	recordsPerblock int
+}
+
+func main() {
+	filename := flag.String("gen-path", "tmp/purchases.avro", "generated avro file path")
 }
 
 func newGeneratorFromArgs(args []string) *generator {

@@ -19,10 +19,6 @@ func profileStop(args []string) func() {
 	fs.BoolVar(&cpu, "cpu", false, "run cpu profile")
 	fs.BoolVar(&mem, "mem", false, "run memory profile")
 
-	if err := fs.Parse(args); err != nil {
-		panic("failed to parse flags")
-	}
-
 	if mem {
 		p := profile.Start(profile.MemProfile, profile.ProfilePath("."))
 		profiles = append(profiles, p)

@@ -11,12 +11,12 @@ func CLI(args []string) int {
 		return 2
 	}
 
-	defer profileStop(args)()
+	defer profileStop(args[1:])()
 
 	var err error
 	switch args[0] {
 	case "gen":
-		err = cliGen(args)
+		err = cliGen(args[1:])
 	}
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Runtime error: %v\n", err)
@@ -25,11 +25,8 @@ func CLI(args []string) int {
 }
 
 func cliGen(args []string) error {
-	gen, err := newGeneratorFromArgs(args)
-	if err != nil {
-		return err
-	}
-	if err = gen.run(); err != nil {
+	gen := newGeneratorFromArgs(args)
+	if err := gen.run(); err != nil {
 		return err
 	}
 	return nil
